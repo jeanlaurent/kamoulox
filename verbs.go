@@ -29,7 +29,7 @@ var verbs = []string{
 	"je forge",
 	"j'insulte",
 	"je dépanne",
-	"j'enquête",
+	"j'enquête sur",
 	"je monte sur",
 	"je malaxe",
 	"je sirote",
