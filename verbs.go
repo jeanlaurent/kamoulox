@@ -1,7 +1,7 @@
 package main
 
 var verbs = []string{
-	"j'entère",
+	"j'enterre",
 	"je tourne",
 	"j'avance vers",
 	"je regarde",
