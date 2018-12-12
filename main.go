@@ -9,13 +9,14 @@ import (
 
 func main() {
 	rand.Seed(time.Now().Unix())
-	kamoulox := kamoulox{}
+	kamoulox := Kamoulox{}
 	fmt.Println(kamoulox.generate())
 }
 
-type kamoulox struct{}
+// Kamoulox generates down a famous kamoulox sentence
+type Kamoulox struct{}
 
-func (k *kamoulox) generate() string {
+func (k *Kamoulox) generate() string {
 	firstVerb := randomElementFrom(verbs)
 	firstObject := randomElementFrom(objects)
 	return fmt.Sprintf("%s %s et %s %s.", capitalizeFirst(firstVerb), firstObject, randomElementFromExcluding(verbs, firstVerb), randomElementFromExcluding(objects, firstObject))
