@@ -13,6 +13,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build --label "org.opencontainers.image.revision=$(git rev-parse HEAD)" --label "org.opencontainers.image.source=https://github.com/jeanlaurent/kamoulox" --label \"com.atomist.containers.image.dockerfile=Dockerfile\" -t jeanlaurent/kamoulox .
+    
+    - name: Login to DockerHub
+    - uses: docker/login-action@v1
+    - with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          
+    - name: Build and push
+    - uses: docker/build-push-action@v2
+    - with:
+          context: .
+          push: true
+          tags: jeanlaurent/kamoulox
+#       run: docker build --label "org.opencontainers.image.revision=$(git rev-parse HEAD)" --label "org.opencontainers.image.source=https://github.com/jeanlaurent/kamoulox" --label \"com.atomist.containers.image.dockerfile=Dockerfile\" -t jeanlaurent/kamoulox .
