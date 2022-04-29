@@ -1,4 +1,5 @@
 FROM golang:1.18.1-alpine3.15 as gobuilder
+RUN apk add git
 WORKDIR /go/src/github.com/jeanlaurent/kamoulox
 COPY . ./
 RUN go build .
