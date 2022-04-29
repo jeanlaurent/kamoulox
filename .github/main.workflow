@@ -5,7 +5,10 @@ workflow "Deploy kamoulox" {
 
 action "Build kamoulox" {
   uses = "actions/docker/cli@76ff57a"
-  args = "build -t jeanlaurent/kamoulox ."
+  args = "build --label \"org.opencontainers.image.revision=$(git rev-parse HEAD)\" \
+  --label \"org.opencontainers.image.source=https://github.com/jeanlaurent/kamoulox\" \
+  --label \"com.atomist.containers.image.dockerfile=Dockerfile\" \
+  -t jeanlaurent/kamoulox ."
 }
 
 action "Login to Docker Registry" {
