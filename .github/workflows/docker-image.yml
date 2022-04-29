@@ -35,7 +35,6 @@ jobs:
          images: |
             jeanlaurent/kamoulox
          labels: |
-            org.opencontainers.image.revision=sha
             org.opencontainers.image.source=https://github.com/jeanlaurent/kamoulox
             com.atomist.containers.image.dockerfile=Dockerfile
     
