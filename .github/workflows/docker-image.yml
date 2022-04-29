@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build -t jeanlaurent/kamoulox .
+      run: docker build --label "org.opencontainers.image.revision=$(git rev-parse HEAD)" --label "org.opencontainers.image.source=https://github.com/jeanlaurent/kamoulox" --label \"com.atomist.containers.image.dockerfile=Dockerfile\" -t jeanlaurent/kamoulox .
