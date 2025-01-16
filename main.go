@@ -3,20 +3,18 @@ package main
 import (
 	"fmt"
 	"math/rand"
-	"time"
 	"unicode"
 )
 
 func main() {
-	rand.Seed(time.Now().Unix())
 	kamoulox := Kamoulox{}
-	fmt.Println(kamoulox.generate())
+	fmt.Println(kamoulox.Generate())
 }
 
-// Kamoulox generates down a famous kamoulox sentence
+// Kamoulox generates a famous kamoulox sentence
 type Kamoulox struct{}
 
-func (k *Kamoulox) generate() string {
+func (k *Kamoulox) Generate() string {
 	firstVerb := randomElementFrom(verbs)
 	firstObject := randomElementFrom(objects)
 	return fmt.Sprintf("%s %s et %s %s.", capitalizeFirst(firstVerb), firstObject, randomElementFromExcluding(verbs, firstVerb), randomElementFromExcluding(objects, firstObject))
