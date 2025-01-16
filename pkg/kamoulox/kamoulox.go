@@ -1,20 +1,13 @@
-package main
+package kamoulox
 
 import (
 	"fmt"
-	"math/rand"
 	"unicode"
+
+	"math/rand"
 )
 
-func main() {
-	kamoulox := Kamoulox{}
-	fmt.Println(kamoulox.Generate())
-}
-
-// Kamoulox generates a famous kamoulox sentence
-type Kamoulox struct{}
-
-func (k *Kamoulox) Generate() string {
+func GenerateKamoulox() string {
 	firstVerb := randomElementFrom(verbs)
 	firstObject := randomElementFrom(objects)
 	return fmt.Sprintf("%s %s et %s %s.", capitalizeFirst(firstVerb), firstObject, randomElementFromExcluding(verbs, firstVerb), randomElementFromExcluding(objects, firstObject))

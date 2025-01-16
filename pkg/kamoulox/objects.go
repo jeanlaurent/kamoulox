@@ -1,4 +1,4 @@
-package main
+package kamoulox
 
 var objects = []string{
 	"un caleçon",
