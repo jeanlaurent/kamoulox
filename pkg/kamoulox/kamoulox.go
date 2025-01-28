@@ -2,15 +2,36 @@ package kamoulox
 
 import (
 	"fmt"
+	"strings"
 	"unicode"
 
 	"math/rand"
 )
 
 func GenerateKamoulox() string {
-	firstVerb := randomElementFrom(verbs)
-	firstObject := randomElementFrom(objects)
-	return fmt.Sprintf("%s %s et %s %s.", capitalizeFirst(firstVerb), firstObject, randomElementFromExcluding(verbs, firstVerb), randomElementFromExcluding(objects, firstObject))
+	numPairs := rand.Intn(3) + 2 // Generate between 2 and 4 pairs
+	usedVerbs := make([]string, 0, numPairs)
+	usedObjects := make([]string, 0, numPairs)
+	pairs := make([]string, 0, numPairs)
+
+	for i := 0; i < numPairs; i++ {
+		verb := randomElementFromExcluding(verbs, usedVerbs...)
+		object := randomElementFromExcluding(objects, usedObjects...)
+		usedVerbs = append(usedVerbs, verb)
+		usedObjects = append(usedObjects, object)
+		if i == 0 {
+			verb = capitalizeFirst(verb)
+		} else {
+			verb = strings.TrimPrefix(verb, "je ")
+			verb = strings.TrimPrefix(verb, "j'")
+		}
+		pair := fmt.Sprintf("%s %s", verb, object)
+		pairs = append(pairs, pair)
+	}
+
+	sentence := strings.Join(pairs[:len(pairs)-1], ", ")
+	sentence += " et " + pairs[len(pairs)-1] + "."
+	return sentence
 }
 
 func randomElementFrom(array []string) string {
@@ -23,11 +44,18 @@ func capitalizeFirst(str string) string {
 	}
 	return ""
 }
-
-func randomElementFromExcluding(array []string, toExclude string) string {
-	found := array[rand.Intn(len(array))]
-	if found != toExclude {
-		return found
+func randomElementFromExcluding(array []string, toExclude ...string) string {
+	for {
+		found := array[rand.Intn(len(array))]
+		exclude := false
+		for _, ex := range toExclude {
+			if found == ex {
+				exclude = true
+				break
+			}
+		}
+		if !exclude {
+			return found
+		}
 	}
-	return randomElementFromExcluding(array, toExclude)
 }

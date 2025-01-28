@@ -1,9 +1,14 @@
-FROM golang:1.23.1 AS gobuilder
-WORKDIR /go/src/github.com/jeanlaurent/kamoulox
-COPY . ./
-RUN go build .
+FROM golang:1.23.4-alpine AS gobuilder
+WORKDIR /src
+COPY go.mod ./
+RUN --mount=type=cache,target=/go/pkg/mod \
+    go mod download
+COPY . /src/
+RUN --mount=type=cache,target=/root/.cache \
+    --mount=type=cache,target=/go/pkg/mod \
+    go build -o kamoulox cmd/kamoulox/*.go
 
 FROM scratch
 WORKDIR /app
-COPY --from=gobuilder /go/src/github.com/jeanlaurent/kamoulox /app/
+COPY --from=gobuilder /src/kamoulox /app/
 ENTRYPOINT ["./kamoulox"]

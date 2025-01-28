@@ -1,3 +1,3 @@
 module github.com/jeanlaurent/kamoulox
 
-go 1.23
+go 1.23.4
