@@ -8,7 +8,7 @@ Example:
 
 ```
 > docker run jeanlaurent/kamoulox
-Je photocopie un seau et je déneige un palmier.
+Je photocopie un seau et déneige un palmier.
 ```
 
 [![Docker Image CI](https://github.com/jeanlaurent/kamoulox/actions/workflows/docker-image.yml/badge.svg)](https://github.com/jeanlaurent/kamoulox/actions/workflows/docker-image.yml)
